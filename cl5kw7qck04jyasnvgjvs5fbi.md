@@ -1,6 +1,6 @@
 ## 浅析 flamego的动态注入
 
-#1. 如何实现动态注入？
+# 1. 如何实现动态注入？
 
 flamego的handle设计很巧妙,它的`Handler`的类型是一个`interface{}`的定义
 ```go
