@@ -117,6 +117,13 @@ func (inj *injector) Value(t reflect.Type) reflect.Value {
 	val := inj.values[t]
 
 	// ... 省略 校验val 以及返回val
+
+    // 如果自己的map没有，则会 lookup parent是否含有
+    // 是什么时候设置的parent?
+    // flame.go#createContext 设置了`context`的parent为`flame`实例
+	if !val.IsValid() && inj.parent != nil {
+		val = inj.parent.Value(t)
+	}
 }
 ```
 
@@ -141,7 +148,6 @@ f.Get("/test", func(ctx flamego.Context, p P) {
 fzdwx
 [Flamego] 2022-07-14 18:29:45: Completed GET /test 0  in 3.1801852s
 ```
-
 
 ---
 如有说的不对的，欢迎批评指正！
