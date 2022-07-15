@@ -21,7 +21,7 @@ f.Get("/ping", func(c flamego.Context) string {
 1.  在服务启动时，有一个默认的`type`匹配
 2. 在方法调用时进行注入
 
-## 1.默认匹配
+## a.默认匹配
 可以直接看https://github.com/flamego/flamego/blob/main/router.go 里面的`Route`的这个方法的实现:
 ```go
 func (r *router) Route(method, routePath string, handlers []Handler) *Route {
@@ -65,7 +65,7 @@ f.Get("/test", func(ctx flamego.Context) {
 })
 ```
 
-## 2.而动态注入呢？
+## b.而动态注入呢？
 还是`router.go#Route`的这个方法:
 ```go
 func (r *router) Route(method, routePath string, handlers []Handler) *Route {
@@ -126,6 +126,7 @@ func (inj *injector) Value(t reflect.Type) reflect.Value {
 	}
 }
 ```
+
 
 # 2.如何注入自定义的实例？
 `flamego`提供了一个`Map`方法,可以添加到`inj.values`里面去:
